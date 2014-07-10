@@ -26,37 +26,126 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-\end{abstract}
+% \begin{abstract}
+% \end{abstract}
 
 \section{Introdução} \label{introducao}
-\indent\indent Em um proceso de anotação semântica a definição dos possiveis recursos candidatos para cada nome de entidade é uma tarefa fundamental. Pois é a partir destas relação que as anotações paras as entidades interessantes serão escolhidas. O conjunto das relações nome de entidades, recursos é denominado de mapa de candidatos. E pode ser definido de diversas formas.
+\indent\indent Em um processo de anotação semântica a definição dos possíveis recursos candidatos para cada nome de entidade é uma tarefa fundamental. Pois é a partir destas relação que as anotações paras as entidades interessantes serão escolhidas. O conjunto das relações nome de entidades, recursos é denominado de mapa de candidatos. E pode ser definido de diversas formas.
 
-Podendo o uso das diferentes formas de obtenção dos candidatos gerar mapas de qualidades distintas. Neste contexto, a avaliação de quais são as melhores estratégias de extração de candidatos se torna importante. Nas seções a seguir, quatro destas técnicas seram comparadas.
+Podendo o uso das diferentes formas de obtenção dos candidatos gerar mapas de qualidades distintas. Neste contexto, a avaliação de quais são as melhores estratégias de extração de candidatos se torna importante. Nas seções a seguir, quatro destas técnicas serão comparadas.
 
 
 \section{Estratégias de Extração de Mapa de Candidatos} \label{extracao-mapa-candidatos}
-\indent\indent As estratégias de extração de mapa de candidatos abordadas por este trabalho são a partir dos titulos, dos redirecionamentos, das disambiguações e das ocorrências no conteúdo das páginas.
+\indent\indent As estratégias de extração de mapa de candidatos abordadas por este trabalho são a partir dos títulos, dos redirecionamentos, das desambiguações e das ocorrências no conteúdo das páginas.
+
+O projeto DBpedia disponibilizam os arquivos com os títulos destas, redirecionamentos que levam para cada uma, e desambiguações (chamados, respectivamente, por: labels, redirects e disambiguations \ref{DBpedia-files-webpage}). E é possível obter o dump do conteúdo todas as páginas em uma língua na Wikipédia \ref{extraction-framework}. A partir destes o DBpedia Spotlight consegue extrair mapeamentos de candidatos segundo as quatro estratégias descritas a seguir respectivamente. %Como exemplo as Tabelas \ref{tab-berlim-labels}, \ref{tab-berlim-redirects} e \ref{tab-berlim-disambiguations} apresentam as linhas dos arquivos de títulos, redirecionamentos e desambiguações referentes a entidade ``Berlim'' na DBpedia em português. Por sua vez o dump não será apresentado neste trabalho pois sua visualização se torna mais fácil consultando a página referente na Wikipédia (http://pt.wikipedia.org/wiki/Berlim).
+Na quais o recurso ``Berlin'' da DBpedia em inglês (http://dbpedia.org/resource/Berlin) será utilizada como exemplo.
+
+% \begin{table}[h] \label{tab-berlim-labels}
+% \caption{Conteúdo do arquivo labels para entidade ``Berlim``}
+%  \begin{tabular}{l}
+%  
+%  \end{tabular}
+% \end{table}
+%  
+% \begin{table}[h] \label{tab-berlim-redirects}
+% \caption{Conteúdo do arquivo redirects para entidade ``Berlim``}
+%  \begin{tabular}{l}
+% <http://pt.dbpedia.org/resource/Estado\_de\_Berlim> \\<http://dbpedia.org/ontology/wikiPageRedirects> \\ <http://pt.dbpedia.org/resource/Berlim> .\\ \\
+% <http://pt.dbpedia.org/resource/Área\_Metropolitana\_de\_Berlim> \\<http://dbpedia.org/ontology/wikiPageRedirects>\\ <http://pt.dbpedia.org/resource/Berlim> .\\ \\
+% <http://pt.dbpedia.org/resource/Área\_metropolitana\_de\_berlim> \\<http://dbpedia.org/ontology/wikiPageRedirects>\\ <http://pt.dbpedia.org/resource/Berlim> .\\ \\
+% <http://pt.dbpedia.org/resource/Estado\_de\_berlim> \\<http://dbpedia.org/ontology/wikiPageRedirects>\\ <http://pt.dbpedia.org/resource/Berlim> .\\ \\
+% <http://pt.dbpedia.org/resource/Berlin> \\<http://dbpedia.org/ontology/wikiPageRedirects> \\<http://pt.dbpedia.org/resource/Berlim> .
+%  \end{tabular}
+% \end{table}
+% 
+% \begin{table}[h] \label{tab-berlim-disambiguations}
+% \caption{Conteúdo do arquivo disambiguations para entidade ``Berlim``}
+%  \begin{tabular}{l}
+%  
+%  \end{tabular}
+% \end{table}
 
 \subsection{Extração a partir dos títulos} \label{extracao-titulos}
-\indent\indent A
-\todo{seção}
+\indent\indent Toda a página na DBpedia que descreve um recurso é identificada por uma URL composta do endereço da DBpedia para o determinado idioma de um identificador de que se trata de um recurso, idêntico para todas as identidades, e, por último, de um rótulo (\textit{label}) exclusivo da entidade, o qual também é chamado de título. Do exemplo teríamos:
+\begin{itemize}
+ \item Parte comum: ''http://dbpedia.org/page/''
+ \item Rótulo/Título: ``Berlin''
+\end{itemize}
+
+A estratégia de extração de candidatos a partir dos títulos consiste em considerar o rótulo de todos os recursos como uma \textit{surface forms} da qual o respectivo recurso é candidato. Portanto, um candidato para a \textit{surface form}, ``berlin''\\footnote{Neste relatório cosideramos as variações de maíuscula e minúsculas, como sendo a mesma \textit{surface form}. Ou seja, ``berlin'' é considerado equivalente a: ``Berlin'', ``BERLIN'', etc.} é o resurso ``http://dbpedia.org/resource/Berlin''. Por esta estratégia tem-se, a natural relação de que todo o recurso da DBpedia no idioma será candidato de pelo menos a \textit{surface form} que o entitula.
 
 \subsection{Extração a partir dos redirecionamentos} \label{extracao-redirecionamentos}
-\indent\indent A
-\todo{seção}
+\indent\indent Uma recurso na DBpedia e na Wikipédia pode ser alcançado não apenas por seu título, podendo, diversos, serem acessados por outras formas de referenciamento. Sendo estes identificadores secundário chamados de redirecionamentos. Por exemplo, o recurso ``http://dbpedia.org/resource/Berlin'' também pode ser acessada pelos redirecionamentos relacionado pelo elemento ``DBpedia-owl:wikiPageRedirects'' da ontologia da DBpedia (descritos em http://dbpedia.org/resource/Berlin). A lista abaixo apresenta alguns destes:
+\begin{itemize}
+ \item Berlin,\_Germany
+ \item City\_of\_Berlin
+ \item Capital\_of\_East\_Germany
+ \item Berlin-Zentrum
+ \item Berlin.de
+ \item Berlin\_(Germany)
+ \item Federal\_State\_of\_Berlin
+ \item Historical\_sites\_in\_berlin
+ \item Land\_Berlin
+\end{itemize}
 
-\subsection{Extração a partir das disambiguações} \label{extracao-disambiguacoes}
-\indent\indent A
-\todo{seção}
+É importante ressaltar que em qualquer uma das estratégia de extração de candidato o DBpedia Spotlight desconsidera durante os caracteres especiais adicionados pela DBpedia, afim de obter as \textit{surface forms} no formato original em que aparecem em textos. Obtendo, assim, a lista a seguir:
+\begin{itemize}
+ \item ''berlin, germany``
+ \item ``city of berlin''
+ \item ''capital of east germany``
+ \item ``berlin-zentrum''
+ \item ''berlin.de``
+ \item ``berlin (germany)''
+ \item ''federal state of berlin``
+ \item ``historical sites in berlin''
+ \item ''land berlin``
+\end{itemize}
+
+Observa-se que da mesma forma que uma ocorrência da palavra ''berlin`` em um texto tem chanses de se referir ao recurso ''http://dbpedia.org/resource/Berlin``, isto é válido para ''city of berlin``, ''berlin, germany`` e as demais obtidas do redirecionamento. Por isto, a estratégia de extração de candidatos a partir dos redirecionamentos, considerará as lista acima como \textit{surface forms} para as quais o recurso ''http://dbpedia.org/resource/Berlin`` é um candidato.
+
+\subsection{Extração a partir das desambiguações} \label{extracao-disambiguacoes}
+\indent\indent Uma expressão pode ter diversos significados, estas ambiguidades são relacionadas nas páginas de desambiguação da DBpedia (e Wikipédia). O DBpedia Spotlight é capaz de extrair utilizando-se de um processo inverso ao realizado pelo estratégia a partir dos redirecionamentos.
+
+Seja a página de desambiguação da DBpedia: ''http://dbpedia.org/page/Berlin\_(disambiguation)``. Removendo as estruturas utilizadas pela DBpedia para construção da URL e identificação de que se trata de uma página de desambiguação, tem-se a \textit{surface form}: ''berlin``\\footnote{E realizando as mesmas formatações descritas na Seção \ref{extracao-titulos}.
+
+As páginas de desambigução apresentam no elemento ''dbpedia-owl:wikiPageDisambiguates`` da ontologia todos os recursos relacionados com a \textit{surface form} obtida do título da página de desambiguação. Alguns destes recursos para a página de desambiguação de exemplo estão listados abaixo:
+\begin{itemize}
+ \item http://dbpedia.org/resource/Berlin
+ \item http://dbpedia.org/resource/Berlin,\_New\_Hampshire
+ \item http://dbpedia.org/resource/Berlin,\_Wisconsin
+ \item http://dbpedia.org/resource/Berlin,\_Marathon\_County,\_Wisconsin
+ \item http://dbpedia.org/resource/Berlin\_(Amtrak\_station)
+ \item http://dbpedia.org/resource/Berlin\_(band)
+ \item http://dbpedia.org/resource/Mount\_Berlin
+ \item http://dbpedia.org/resource/SS\_Berlin
+ \item http://dbpedia.org/resource/Berlin\_(comic)
+ \item http://dbpedia.org/resource/Berlin\_(surname)
+ \item http://dbpedia.org/resource/East\_Berlin\_(disambiguation)
+ \item http://dbpedia.org/resource/West\_Berlin\_(disambiguation)
+\end{itemize}
+
+Observa-se que além do recurso utilizado como exemplo para as estratégias anteriores (Seções \ref{extracao-titulos} e \ref{extracao-redirecionamentos}), o qual é a entidade referente a capital da Alemanha, a expressão ''berlin`` também está associada a outras cidades, tal qual a entidades de outras natureza como: estação de trem, banda de música, monte, embarcação, série de história em quadrinhos, sobrenome.
+
+Portanto, está estratégia de extração de mapa de candidatos irá considerar todos estes recursos como candidatos para a \textit{surface form} extraída do título da página de desambiguação, no caso ''berlin``. Esta, ainda, terá como candidatos os recursos relacionados as páginas de desambiguação que estiverem listadas no elemento ''dbpedia-owl:wikiPageDisambiguates``. Para o exemplo, todos os recursos obtidos pela estratégia de desambiguação para as páginas ''http://dbpedia.org/resource/East\_Berlin\_(disambiguation)`` e ''http://dbpedia.org/resource/West\_Berlin\_(disambiguation)`` serão candidatos para ''berlin``, tal qual para a \textit{surface form} obtida do título de suas respectivas páginas.
 
 \subsection{Extração a partir das ocorrências} \label{extracao-ocorrencias}
-\indent\indent A
-\todo{seção}
+\indent\indent Diferentemente das estratégias anteriores, a extração a partir das ocorrências no contúdo de uma página da Wikipédia não utiliza-se da estrutura do nome dos recursos ou dos elementos da ontologia definida na DBpedia. Por sua vez, é realizado processando o conteúdo cada página da Wikipédia (as quais são obtidas através de dump desta para um idioma realizado pelo software livre \ref{extraction-framework}).
+
+Este processamento é feito de forma a identificar as expressões de mais relevantes no texto contido na página. As quais serão consideradas \textit{surface forms} relacionadas ao recurso da página. Por exemplo, seja a página da Wikipédia: ''http://en.wikipedia.org/wiki/Berlin'' e algumas expressões relevantes identificadas listadas a seguir:
+\begin{itemize}
+ \item ``berlin''
+ \item ``germany's largest city''
+ \item ``capital city of germany''
+ \item ``capital of the kingdom of prussia''
+ \item ``berliner''
+\end{itemize}
+
+Sabe-se que que o recurso da DBpedia referente a está página é o recurso: ``http://dbpedia.org/resource/Berlin''. O qual será mapeado como candidato para todas as \textit{surface forms} listadas acima.
 
 
 \section{Experimentos} \label{experimentos}
-\indent\indent Inicialmente foram construidos os mapas de candidatos por cada uma das estratégias descritas na Seção \ref{extracao-mapa-candidatos} separadamente. Obtendo, assim, os mapas a partir: dos titulos (\textit{T}), dos redirecionamentos (\textit{R}), das disambiguações (\textit{D}) e das ocorrências (\textit{O}). Isto foi realizado utilizando o Algoritmo \ref{alg-extractCandidateMap} tendo como entrada o \textit{dump} de todos os arquivos da DBpedia \ref{DBpediaOrg} em inglês.
+\indent\indent Inicialmente foram construídos os mapas de candidatos por cada uma das estratégias descritas na Seção \ref{extracao-mapa-candidatos} separadamente. Obtendo, assim, os mapas a partir: dos títulos (\textit{T}), dos redirecionamentos (\textit{R}), das desambiguações (\textit{D}) e das ocorrências (\textit{O}). Isto foi realizado utilizando o Algoritmo \ref{alg-extractCandidateMap} tendo como entrada o \textit{dump} de todos os arquivos da DBpedia \ref{DBpediaOrg} em inglês.
 
 Para a avaliação da qualidade destes quatro mapas, foram utilizados três cospora obtidos na literatura com textos em inglês (Seção \ref{corpora}). Onde, para cada entidade destes foram verificadas se o recurso ao qual estavam anotados era um dos candidatos relacionados a entidade pelo mapa em questão (Algoritmo \ref{alg-extractCandidateMap}). Então, foram calculadas as seguintes métricas (conforme proposto por \cite{citet-Hachey2012}):
 
@@ -77,7 +166,7 @@ Para a avaliação da qualidade destes quatro mapas, foram utilizados três cosp
     {\bf Número de Artigos}   & 50                    & 103                                 & 1393                        \\ \hline
     ~ {\bf Número de Entidades} ~ & 706                   & 12099                               & 34929                       \\ \hline
     {\bf Estilo dos Artigos}  & ~ Jornalístico ~          & ~ Jornalístico ~                & ~ Jornalístico ~                \\
-    ~                                    & ~                     & ~ e {\it Wikipedia} ~ & ~                           \\ \hline
+    ~                                    & ~                     & ~ e {\it Wikipédia} ~ & ~                           \\ \hline
     \end{tabular}
 \end{table}
 
