@@ -145,17 +145,7 @@ Sabe-se que que o recurso da DBpedia referente a está página é o recurso: ``h
 
 
 \section{Experimentos} \label{experimentos}
-\indent\indent Inicialmente foram construídos os mapas de candidatos por cada uma das estratégias descritas na Seção \ref{extracao-mapa-candidatos} separadamente. Obtendo, assim, os mapas a partir: dos títulos (\textit{T}), dos redirecionamentos (\textit{R}), das desambiguações (\textit{D}) e das ocorrências (\textit{O}). Isto foi realizado utilizando o Algoritmo \ref{alg-extractCandidateMap} tendo como entrada o \textit{dump} de todos os arquivos da DBpedia \ref{DBpediaOrg} em inglês.
-
-Para a avaliação da qualidade destes quatro mapas, foram utilizados três cospora obtidos na literatura com textos em inglês (Seção \ref{corpora}). Onde, para cada entidade destes foram verificadas se o recurso ao qual estavam anotados era um dos candidatos relacionados a entidade pelo mapa em questão (Algoritmo \ref{alg-extractCandidateMap}). Então, foram calculadas as seguintes métricas (conforme proposto por \cite{citet-Hachey2012}):
-
-\begin{itemize}
- \item \textit{Acurácia}: é ... \todo{descrever}
- \item \todo{descrição métricas utilizadas segundo Hachey}
-\end{itemize}
-
-\subsection{Corpora} \label{corpora}
-\indent\indent Os corpora utilizados foram: Mille \& Witten Corpus (\cite{citep-MW-vide-apresentacao-spotters}), CSAW Corpus (\cite{citep-CSAW-vide-apresentacao-spotters}) e Aida-CoNLL-Yago2 Corpus (\cite{citep-MW-vide-apresentacao-spotters}). Todos estes compostos A Tabela \ref{tab-corpora} apresenta suas principais características:
+\indent\indent Como padrão de comparação (\textit{Gold Standard - GS}) para a avaliação da qualidade destes quatro mapas, foram utilizados três cospora obtidos na literatura com textos em inglês: Milne \& Witten Corpus (\cite{citep-MW-vide-apresentacao-spotters}), CSAW Corpus (\cite{citep-CSAW-vide-apresentacao-spotters}) e Aida-CoNLL-Yago2 Corpus (\cite{citep-MW-vide-apresentacao-spotters}). Todos estes compostos A Tabela \ref{tab-corpora} apresenta suas principais características:
 
 \begin{table} \label{tab-corpora}
 \caption{Características dos corpora utilizados}
@@ -163,16 +153,77 @@ Para a avaliação da qualidade destes quatro mapas, foram utilizados três cosp
     \begin{tabular}{|c|c|c|c|}
     \hline
     ~                                    & {\bf M\&W} & {\bf CSAW}               & ~ {\bf Aida CoNLL} ~ \\ \hline
-    {\bf Número de Artigos}   & 50                    & 103                                 & 1393                        \\ \hline
-    ~ {\bf Número de Entidades} ~ & 706                   & 12099                               & 34929                       \\ \hline
     {\bf Estilo dos Artigos}  & ~ Jornalístico ~          & ~ Jornalístico ~                & ~ Jornalístico ~                \\
     ~                                    & ~                     & ~ e {\it Wikipédia} ~ & ~                           \\ \hline
+    {\bf Número de Artigos}   & 50                    & 103                                 & 1393                        \\ \hline
+    ~ {\bf Número de Anotações} ~ & 706                   & 12099                               & 34929                       \\ \hline
+    {\bf Número de \textit{Surface Forms} Distintas}   & 579                    & 11015                                 & 4847
+                        \\ \hline
+    \end{tabular}
+
+\end{table}
+
+Inicialmente foram construídos os mapas de candidatos (\textit{Candidate Maps - CM}) por cada uma das estratégias descritas na Seção \ref{extracao-mapa-candidatos} separadamente. Obtendo, assim, os mapas a partir: dos títulos (\textit{T}), dos redirecionamentos (\textit{R}), das desambiguações (\textit{D}) e das ocorrências (\textit{O}). Isto foi realizado utilizando o Algoritmo \ref{alg-extractCandidateMap} tendo como entrada o \textit{dump} de todos os artigos da Wikipédia \ref{WikipediaOrg} em inglês (através do software \ref{extraction-framework}) e os arquivos labels.nt, redirects.nt e disambiguations.nt obtidos do projeto DBpedia para o inglês \ref{DBpediaOrg}. A Tabela \ref{tab-cm-numSf}
+\begin{table} \label{tab-cm-numSf}
+\caption{Número de \textit{Surface Forms} Distintas nos Mapa de Candidatos}
+\centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    ~ {\bf Estratégia de Extração} ~ 	& ~ {\bf M\&W} ~ 	& ~ {\bf CSAW} ~ 	& ~ {\bf Aida CoNLL} ~\\ \hline  
+    {\bf Títulos} 			& 2490150 	& 2490150	& 2490150 \\ \hline
+    {\bf Redirecionamentos} 		& 3285816 	& 3285816	& 3285816 \\ \hline
+    {\bf Desambiguações} 		& 179447	& 179447	& 179447 \\ \hline
+    {\bf Ocorrências} 			& 2413762	& 2413762	& 2413762 \\ \hline
     \end{tabular}
 \end{table}
 
-\subsection{Resultados} \label{resultados}
-\indent\indent A
-\todo{Dados Carolina}
+Analisando a Tabela \ref{tab-cm-numSf} e a última linha da Tabela \ref{tab-corpora} observa-se que existe muito mais \textit{surface forms} distintas nos mapas de candidatos do que nos \textit{gold standards}. Portanto, foi verificado quantas destas estão em ambos (Tabela \ref{tab-metrica1}).
+
+\begin{table} \label{tab-}
+\caption{Número de Elementos na Interseção dos GS e CM}
+\centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    ~ {\bf Estratégia de Extração} ~ 	& ~ {\bf M\&W} ~ 	& ~ {\bf CSAW} ~ 	& ~ {\bf Aida CoNLL} ~\\ \hline  
+    {\bf Títulos} 			& 198			& 1039			& 4659 \\ \hline
+    {\bf Redirecionamentos} 		& 191			& 1009			& 3617 \\ \hline
+    {\bf Desambiguações} 		& 132			& 615			& 2444 \\ \hline
+    {\bf Ocorrências} 			& 71			& 369			& 2476 \\ \hline
+    \end{tabular}
+\end{table}
+
+Para cada anotação em um \textit{gold standard} foi verificado se o recurso para o qual estava anotada era um dos candidatos relacionados a \textit{surface form} pelo respectivo mapa. A Tabela \ref{tab-metrica2} apresenta estes resultados:
+\begin{table} \label{tab-metrica2}
+\caption{Número de Recursos Anotados no GS Mapeados a Respectiva \textit{Surface Forms} no CM}
+\centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    ~ {\bf Estratégias de Extração} ~ 	& ~ {\bf M\&W} ~ 	& ~ {\bf CSAW} ~ 	& ~ {\bf Aida CoNLL} ~\\ \hline  
+    {\bf Títulos} 			& 194			& 1606			& 10260 \\ \hline
+    {\bf Redirecionamentos} 		& 113			& 928			& 4070 \\ \hline
+    {\bf Desambiguações} 		& 39			& 281			& 1727 \\ \hline
+    {\bf Ocorrências} 			& 11			& 182			& 2008 \\ \hline
+    \end{tabular}
+\end{table}
+
+Confome os esperado os 
+
+\begin{table} \label{tab-}
+\caption{Número de }
+\centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    ~ {\bf Estratégias de Extração} ~ 	& ~ {\bf M\&W} ~ 	& ~ {\bf CSAW} ~ 	& ~ {\bf Aida CoNLL} ~\\ \hline  
+    {\bf Títulos} 			& 			& 			&  \\ \hline
+    {\bf Redirecionamentos} 		& 			& 			&  \\ \hline
+    {\bf Desambiguações} 		& 			& 			&  \\ \hline
+    {\bf Ocorrências} 			& 			& 			&  \\ \hline
+    \end{tabular}
+\end{table}
+
+
+
+%Então, foram calculadas as seguintes métricas (conforme proposto por \cite{citet-Hachey2012}):
 
 \section{Conclusão} \label{conclusao}
 \indent\indent A
