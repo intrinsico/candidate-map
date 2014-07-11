@@ -177,10 +177,9 @@ Inicialmente foram construídos os mapas de candidatos (\textit{Candidate Maps -
     \end{tabular}
 \end{table}
 
-Analisando a Tabela \ref{tab-cm-numSf} e a última linha da Tabela \ref{tab-corpora} observa-se que existe muito mais \textit{surface forms} distintas nos mapas de candidatos do que nos \textit{gold standards}. Portanto, foi verificado quantas destas estão em ambos (Tabela \ref{tab-metrica1}).
-
-\begin{table} \label{tab-}
-\caption{Número de Elementos na Interseção dos GS e CM}
+Analisando a Tabela \ref{tab-cm-numSf} e a última linha da Tabela \ref{tab-corpora} observa-se que existe muito mais \textit{surface forms} distintas nos mapas de candidatos do que nos \textit{gold standards}. Portanto, foi verificado quantas destas estão em ambos desconsiderando as repetições, isto é apresentado pela Tabela \ref{tab-metrica1}, enquanto a Tabela \ref{tab-metrica4} mostra a quantidade de \ref{surface forms} distintas contidas no \textit{gold standard} mas ausentes nos mapas de candidatos.
+\begin{table} \label{tab-metrica1}
+\caption{Número de \textit{Surface Forms} Distintas na Interseção dos GS e CM}
 \centering
     \begin{tabular}{|c|c|c|c|}
     \hline
@@ -191,10 +190,22 @@ Analisando a Tabela \ref{tab-cm-numSf} e a última linha da Tabela \ref{tab-corp
     {\bf Ocorrências} 			& 71			& 369			& 2476 \\ \hline
     \end{tabular}
 \end{table}
+\begin{table} \label{tab-metrica4}
+\caption{Número de \textit{Surface Forms} Distintas dos GS Não Contidas nos CM}
+\centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    ~ {\bf Estratégias de Extração} ~ 	& ~ {\bf M\&W} ~ 	& ~ {\bf CSAW} ~ 	& ~ {\bf Aida CoNLL} ~\\ \hline  
+    {\bf Títulos} 			& 381			& 3808			& 6356 \\ \hline
+    {\bf Redirecionamentos} 		& 388			& 3838			& 7398 \\ \hline
+    {\bf Desambiguações} 		& 447			& 4232			& 8571 \\ \hline
+    {\bf Ocorrências} 			& 508			& 4478			& 8539 \\ \hline
+    \end{tabular}
+\end{table}
 
-Para cada anotação em um \textit{gold standard} foi verificado se o recurso para o qual estava anotada era um dos candidatos relacionados a \textit{surface form} pelo respectivo mapa. A Tabela \ref{tab-metrica2} apresenta estes resultados:
+Para cada anotação em um \textit{gold standard} foi verificado se o recurso para o qual estava anotada era um dos candidatos relacionados a \textit{surface form} pelo respectivo mapa. As Tabelas \ref{tab-metrica2} e \ref{tab-metrica3} apresentam as quantidades de avaliações positivas e negativas, respectivamente:
 \begin{table} \label{tab-metrica2}
-\caption{Número de Recursos Anotados no GS Mapeados a Respectiva \textit{Surface Forms} no CM}
+\caption{Número de Recursos Anotados no GS Candidatos da Respectiva \textit{Surface Forms} no CM}
 \centering
     \begin{tabular}{|c|c|c|c|}
     \hline
@@ -205,29 +216,68 @@ Para cada anotação em um \textit{gold standard} foi verificado se o recurso pa
     {\bf Ocorrências} 			& 11			& 182			& 2008 \\ \hline
     \end{tabular}
 \end{table}
-
-Confome os esperado os 
-
-\begin{table} \label{tab-}
-\caption{Número de }
+\begin{table} \label{tab-metrica3}
+\caption{Número de Recursos Anotados no GS que Não são Candidatos da Respectiva \textit{Surface Forms} no CM}
 \centering
     \begin{tabular}{|c|c|c|c|}
     \hline
     ~ {\bf Estratégias de Extração} ~ 	& ~ {\bf M\&W} ~ 	& ~ {\bf CSAW} ~ 	& ~ {\bf Aida CoNLL} ~\\ \hline  
-    {\bf Títulos} 			& 			& 			&  \\ \hline
-    {\bf Redirecionamentos} 		& 			& 			&  \\ \hline
-    {\bf Desambiguações} 		& 			& 			&  \\ \hline
-    {\bf Ocorrências} 			& 			& 			&  \\ \hline
+    {\bf Títulos} 			& 61			& 780			& 9084 \\ \hline
+    {\bf Redirecionamentos} 		& 154			& 1459			& 15119 \\ \hline
+    {\bf Desambiguações} 		& 146			& 1361			& 13543 \\ \hline
+    {\bf Ocorrências} 			& 73			& 436			& 2969 \\ \hline
     \end{tabular}
 \end{table}
 
+Note que as Tabelas \ref{tab-metrica2} e \ref{tab-metrica3} contém valores maiores que os da Tabela \ref{metrica1} em algumas células. Isto se deve ao fato de que na Tab. \ref{tab-metrica1} não contar as repetições de \textit{surface forms}, e as demais avaliar estas repetições. O que é necessario pois duas ocorrências da mesma \textit{surface form} podem ter sido anotadas para diferentes recursos, onde estes, por sua vez, podem, idependentemente um do outro, estar ou não contidos no mapa de candidatos. A Tabela \ref{tab-sum-metrica2e3} apresenta o número de \textit{surface forms} contidas ambas no \textit{gold standard} e nos mapas de candidatos, contando inclusive as repetições (isto é o mesmo que a soma das células das Tabelas \ref{tab-metrica2} e \ref{tab-metrica3}):
+\begin{table} \label{tab-sum-metrica2e3}
+\caption{Número de \textit{Surface Forms} Contando Repetições na Interseção dos GS e CM}
+\centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    ~ {\bf Estratégias de Extração} ~ 	& ~ {\bf M\&W} ~ 	& ~ {\bf CSAW} ~ 	& ~ {\bf Aida CoNLL} ~\\ \hline  
+    {\bf Títulos} 			& 255			& 2386			& 19344 \\ \hline
+    {\bf Redirecionamentos} 		& 267			& 2387			& 19189 \\ \hline
+    {\bf Desambiguações} 		& 185			& 1642			& 15270 \\ \hline
+    {\bf Ocorrências} 			& 84			& 618			& 4977 \\ \hline
+    \end{tabular}
+\end{table}
 
+Por último, foram obtidas duas métricas de sensibilidades (baseado em \cite{citet-Hachey2012}):
+\begin{itemize}
+ \item \textit{Surface Forms Recall} (Tabela \ref{tab-sfRecall}) - Razão da quantidade de \textit{surface forms} do GS no CM pela quantidade de \textit{surface forms} distintas de GS;
+ \item \textit{Resources Recall} (Tabela \ref{tab-resourceRecall}) - Razão dos recursos recuperados (Tabela \ref{tab-metrica2}) pelas \textit{surface forms} recuperadas (Tabela \ref{tab-metrica1}).
+\end{itemize}
 
-%Então, foram calculadas as seguintes métricas (conforme proposto por \cite{citet-Hachey2012}):
+\begin{table} \label{tab-sfRecall}
+\caption{Surface Forms Recall}
+\centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    ~ {\bf Estratégias de Extração} ~ 	& ~ {\bf M\&W} ~ 	& ~ {\bf CSAW} ~ 	& ~ {\bf Aida CoNLL} ~\\ \hline  
+    {\bf Títulos} 			& 0.3419689119			& 0.2143593976			& 0.4229686791 \\ \hline
+    {\bf Redirecionamentos} 		& 0.3298791019			& 0.2081700021			& 0.328370404 \\ \hline
+    {\bf Desambiguações} 		& 0.2279792746			& 0.1268826078			& 0.221879256 \\ \hline
+    {\bf Ocorrências} 			& 0.1226252159			& 0.0761295647			& 0.224784385 \\ \hline
+    \end{tabular}
+\end{table}
+
+\begin{table} \label{tab-resourcesRecall}
+\caption{Resources Recall}
+\centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    ~ {\bf Estratégias de Extração} ~ 	& ~ {\bf M\&W} ~ 	& ~ {\bf CSAW} ~ 	& ~ {\bf Aida CoNLL} ~\\ \hline  
+    {\bf Títulos} 			& 0.9797979798			& 1.5457170356			& 2.202189311 \\ \hline
+    {\bf Redirecionamentos} 		& 0.5916230366			& 0.9197224975			& 1.1252419132 \\ \hline
+    {\bf Desambiguações} 		& 0.2954545455			& 0.4569105691			& 0.706628478 \\ \hline
+    {\bf Ocorrências} 			& 0.1549295775			& 0.4932249322			& 0.81098546 \\ \hline
+    \end{tabular}
+\end{table}
 
 \section{Conclusão} \label{conclusao}
 \indent\indent A
-\todo{Depende dos resultados}
+\todo{conclusão}
 
 \bibliographystyle{splncs03}
 \bibliography{eswc}
