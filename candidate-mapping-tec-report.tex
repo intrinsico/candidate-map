@@ -18,9 +18,9 @@
 \newcommand{\model}[1]{\textsf{#1}}
 \crefname{table}{Table}{Tables}
 
-\title{Mapeamento de Candidatos}
+\title{Where do the candidates come from?}
 \author{Alexandre Cançado Cardoso}
-\institute{Intrinsic Soluções em Informática M.E.}
+\institute{UFJF}
 \date{\today}
 
 \begin{document}
@@ -30,10 +30,21 @@
 % \end{abstract}
 
 \section{Introdução} \label{introducao}
-\indent\indent Em um processo de anotação semântica a definição dos possíveis recursos candidatos para cada nome de entidade é uma tarefa fundamental. Pois é a partir destas relação que as anotações paras as entidades interessantes serão escolhidas. O conjunto das relações nome de entidades, recursos é denominado de mapa de candidatos. E pode ser definido de diversas formas.
+ Em um processo de anotação semântica a definição dos possíveis recursos candidatos para cada nome de entidade é uma tarefa fundamental. Pois é a partir destas relação que as anotações paras as entidades interessantes serão escolhidas. O conjunto das relações nome de entidades, recursos é denominado de mapa de candidatos. E pode ser definido de diversas formas.
 
 Podendo o uso das diferentes formas de obtenção dos candidatos gerar mapas de qualidades distintas. Neste contexto, a avaliação de quais são as melhores estratégias de extração de candidatos se torna importante. Nas seções a seguir, quatro destas técnicas serão comparadas.
 
+
+
+\section{Trabalhos relacionados}\label{related}
+\textcolor{red}{A Framework for Benchmarking Entity-Annotation Systems}
+
+\textcolor{red}{Outros?}
+
+
+
+\section{Definições e terminologias}
+\textcolor{red}{definir os termos (surface form, etc); definir os conjuntos.}
 
 \section{Estratégias de Extração de Mapa de Candidatos} \label{extracao-mapa-candidatos}
 \indent\indent As estratégias de extração de mapa de candidatos abordadas por este trabalho são a partir dos títulos, dos redirecionamentos, das desambiguações e das ocorrências no conteúdo das páginas.
@@ -65,6 +76,7 @@ Na quais o recurso ``Berlin'' da DBpedia em inglês (http://dbpedia.org/resource
 %  
 %  \end{tabular}
 % \end{table}
+
 
 \subsection{Extração a partir dos títulos} \label{extracao-titulos}
 \indent\indent Toda a página na DBpedia que descreve um recurso é identificada por uma URL composta do endereço da DBpedia para o determinado idioma de um identificador de que se trata de um recurso, idêntico para todas as identidades, e, por último, de um rótulo (\textit{label}) exclusivo da entidade, o qual também é chamado de título. Do exemplo teríamos:
@@ -144,7 +156,7 @@ Este processamento é feito de forma a identificar as expressões de mais releva
 Sabe-se que que o recurso da DBpedia referente a está página é o recurso: ``http://dbpedia.org/resource/Berlin''. O qual será mapeado como candidato para todas as \textit{surface forms} listadas acima.
 
 
-\section{Experimentos} \label{experimentos}
+\section{Experimental results3} \label{experimentos}
 \indent\indent Como padrão de comparação (\textit{Gold Standard - GS}) para a avaliação da qualidade destes quatro mapas, foram utilizados três cospora obtidos na literatura com textos em inglês: Milne \& Witten Corpus (\cite{citep-MW-vide-apresentacao-spotters}), CSAW Corpus (\cite{citep-CSAW-vide-apresentacao-spotters}) e Aida-CoNLL-Yago2 Corpus (\cite{citep-MW-vide-apresentacao-spotters}). Todos estes compostos A Tabela \ref{tab-corpora} apresenta suas principais características:
 
 \begin{table} \label{tab-corpora}
