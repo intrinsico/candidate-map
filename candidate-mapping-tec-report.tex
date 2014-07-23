@@ -26,10 +26,13 @@
 \begin{document}
 \maketitle
 
-% \begin{abstract}
-% \end{abstract}
+ \begin{abstract}
+    \textcolor{red}{create}
+ \end{abstract}
 
 \section{Introdução} \label{introducao}
+
+\textcolor{red}{O que é Name Entity Linking? Falar das classificações feitas no artigo do Cornolti. Para os casos citados, um processo importante é encontrar candidatos para um dado texto. Muitos artigos tem usado a Wikipedia como fonte para desambiguação. Quais informações da wikipedia são importantes para desambiguação? Este artigo apresenta resultados experimentais para identificar quais informações da Wikipedia que contém a informação a ser anotada.}
  Em um processo de anotação semântica a definição dos possíveis recursos candidatos para cada nome de entidade é uma tarefa fundamental. Pois é a partir destas relação que as anotações paras as entidades interessantes serão escolhidas. O conjunto das relações nome de entidades, recursos é denominado de mapa de candidatos. E pode ser definido de diversas formas.
 
 Podendo o uso das diferentes formas de obtenção dos candidatos gerar mapas de qualidades distintas. Neste contexto, a avaliação de quais são as melhores estratégias de extração de candidatos se torna importante. Nas seções a seguir, quatro destas técnicas serão comparadas.
@@ -156,7 +159,10 @@ Este processamento é feito de forma a identificar as expressões de mais releva
 Sabe-se que que o recurso da DBpedia referente a está página é o recurso: ``http://dbpedia.org/resource/Berlin''. O qual será mapeado como candidato para todas as \textit{surface forms} listadas acima.
 
 
-\section{Experimental results3} \label{experimentos}
+\section{Experimental results} \label{experimentos}
+
+\textcolor{red}{Separar entre caracterização dos dados e resultados encontrados}
+
 \indent\indent Como padrão de comparação (\textit{Gold Standard - GS}) para a avaliação da qualidade destes quatro mapas, foram utilizados três cospora obtidos na literatura com textos em inglês: Milne \& Witten Corpus (\cite{citep-MW-vide-apresentacao-spotters}), CSAW Corpus (\cite{citep-CSAW-vide-apresentacao-spotters}) e Aida-CoNLL-Yago2 Corpus (\cite{citep-MW-vide-apresentacao-spotters}). Todos estes compostos A Tabela \ref{tab-corpora} apresenta suas principais características:
 
 \begin{table} \label{tab-corpora}
