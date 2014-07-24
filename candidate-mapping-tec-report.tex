@@ -38,6 +38,15 @@
 Podendo o uso das diferentes formas de obtenção dos candidatos gerar mapas de qualidades distintas. Neste contexto, a avaliação de quais são as melhores estratégias de extração de candidatos se torna importante. Nas seções a seguir, quatro destas técnicas serão comparadas.
 
 
+\textcolor{red}{
+  \begin{itemize}
+    \item Contextualizar (2 parágrafos): o que é NEL, quais os tipos de problemas, wikipedia como fonte principal de informacao
+    \item Problema (2 parágrafos): todos os sistemas possuem um processo parecido (identificar labels, candidatos, desambiguar), então o mapa de candidatos é importante. De onde eles vem na Wikipedia?
+   \item Contribuição (1 parágrafo): descrever a proposta do artigo, organização, etc.
+  \end{itemize}
+}
+
+
 
 \section{Trabalhos relacionados}\label{related}
 \textcolor{red}{A Framework for Benchmarking Entity-Annotation Systems}
@@ -45,9 +54,18 @@ Podendo o uso das diferentes formas de obtenção dos candidatos gerar mapas de 
 \textcolor{red}{Outros?}
 
 
+\textcolor{red}{Como a wikipedia tem sido muito usada como fonte para encontrar entidades em sistemas de information extraction, entao alguns trabalhos tem analisado essa base em busca de entender como as informações estao dispostas na base. Com isso, temos o trabalho de Cornolti que propoe uma forma de avaliar estes tipos de sistemas que usam a Wikipedia. Lá, ele.... blablabla. Ainda, temos o trabalho de X, blablala. Nesse trbaalho, vamos seguir por essa linha aqui, para mostrar que blablabla...}
 
 \section{Definições e terminologias}
 \textcolor{red}{definir os termos (surface form, etc); definir os conjuntos.}
+
+Seja $E$ o conjunto de entidades existentes na Wikipedia, denotamos $CM$ como um mapa de candidato definido como uma relação tal que $CM : D_{CM} \subset S \rightarrow \Sigma $, onde S é o conjunto de surface forms e $ \Sigma = \{ E_1, E_2, \ldots \}$ onde $E_i \subset E$. \textcolor{red}{revisar essa notação}.
+
+Seja $GS$ = $\{(s, e, p); s \in S \wedge e \in E\}$ o conjunto de anotações de referência ... falar do p aqui.
+
+Dar exemplos, explicar melhor....
+
+
 
 \section{Estratégias de Extração de Mapa de Candidatos} \label{extracao-mapa-candidatos}
 \indent\indent As estratégias de extração de mapa de candidatos abordadas por este trabalho são a partir dos títulos, dos redirecionamentos, das desambiguações e das ocorrências no conteúdo das páginas.
@@ -264,7 +282,25 @@ Note que as Tabelas \ref{tab-metrica2} e \ref{tab-metrica3} contém valores maio
 Por último, foram obtidas duas métricas de sensibilidades (baseado em \cite{citet-Hachey2012}):
 \begin{itemize}
  \item \textit{Surface Forms Recall} (Tabela \ref{tab-sfRecall}) - Razão da quantidade de \textit{surface forms} do GS no CM pela quantidade de \textit{surface forms} distintas de GS;
+
+Seja $S_{GS}$ o conjunto de surface forms que existentes no gold standard, definido como $S_{GS} = \{s_i;  (s_i, e, p)  \in GS \}$.
+
+\[   recall_{sf} = \frac{| \{ s_i ; s_i \in D_{CM} \cap S_{GS} \} |}{ |S_{GS}|}    \]
+
  \item \textit{Resources Recall} (Tabela \ref{tab-resourceRecall}) - Razão dos recursos recuperados (Tabela \ref{tab-metrica2}) pelas \textit{surface forms} recuperadas (Tabela \ref{tab-metrica1}).
+
+
+A função $map : GS \rightarrow \{1,0\}$ informa se uma dada tupla de sf e entidade do GS ocorreu no GM. A função é definida como:
+
+\begin{equation}
+mapped((s,e,p)) = \left\{\begin{matrix}
+    1,& \text{se} ~ e \in GM(s)\\ 
+    0,& \text{caso contrario}
+\end{matrix}\right.
+\end{equation}
+
+\[  recall_e = \frac{ \sum_{ \{x \in GS\} } mapped(x) }{ |\{ (s_i, e, p); (s_i, e, p) \in GS \wedge s_i \in D_{CM} \}| }  \]
+
 \end{itemize}
 
 \begin{table} \label{tab-sfRecall}
@@ -292,6 +328,10 @@ Por último, foram obtidas duas métricas de sensibilidades (baseado em \cite{ci
     {\bf Ocorrências} 			& 0.130952381			& 0.2944983819			& 0.4034558971 \\ \hline
     \end{tabular}
 \end{table}
+
+
+\section{Discussão}
+O surface form recall pega surface forms individuais, mas se um surface form aparece muitas vezes, ele tem um "peso" maior no P/R de um dado benchmark. Vale a pena calcular com repetições?
 
 \section{Conclusão} \label{conclusao}
 \indent\indent A
